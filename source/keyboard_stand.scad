@@ -1,34 +1,40 @@
-// 基礎部分
-module plank(rotate_x, rotate_y, rotate_z){
+// 関数の宣言
+module plank(){
 
-	rotate([rotate_x, rotate_y, rotate_z]){
+	// 下部
+	cube([60, 10, 10]);
 
-		// 厚みを10mmに設定
-		linear_extrude(10){
+	// 上部の構造物
+	hull(){
 
-			//時計回り
-			polygon(points=[[0, 0], [0, 10], [8, 40], [13, 40], [13, 10], [28, 10], [28, 40], [33, 40], [40, 10], [40, 0]]); 
+		translate([0, 0, 10]){
 
+			cube([40, 10, 0.01]);
 		}
-	
+
+		translate([0, 0, 70]){
+
+			cube([10, 10, 0.01]);
+		}
+
+	}
+
+	translate([50, 0, 10]){
+
+		cube([10, 10, 10]);
+		
 	}
 
 }
 
-// 1枚目
-plank(90, 0, 0);
+plank();
 
-// y軸方向に100mm移動
-translate([0, 100, 0]){
+translate([0, 60, 0]){
 
-	// 2枚目
-	plank(90, 0, 0);
+	plank();
 
 }
 
-// x軸方向に13mm移動
-translate([13, 0, 0]){
+// 接続部分
+cube([10, 70, 10]);
 
-	cube([15, 100, 10]);
-
-}
