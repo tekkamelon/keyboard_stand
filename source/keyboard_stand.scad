@@ -1,3 +1,7 @@
+// 変数の宣言
+$fn=25;
+bar_length=80;
+
 // 関数の宣言
 module plank(){
 
@@ -27,14 +31,30 @@ module plank(){
 
 }
 
-plank();
+// 一体化
+module all(){
 
-translate([0, 60, 0]){
-
+	// 左側
 	plank();
+
+	// 右側
+	translate([0, bar_length, 0]){
+
+		plank();
+
+	}
+
+	// 接続部分
+	cube([10, bar_length+10, 10]);
 
 }
 
-// 接続部分
-cube([10, 70, 10]);
+// 面取り
+minkowski(){
+
+	sphere(r=1);
+
+	all();
+
+}
 
